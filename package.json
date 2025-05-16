@@ -1,0 +1,14 @@
+{
+  "name": "random-forest-analysis",
+  "version": "1.0.0",
+  "description": "A full-stack machine learning web application for dataset analysis",
+  "scripts": {
+    "start:frontend": "cd frontend && npm start",
+    "start:backend": "cd backend && uvicorn app.main:app --reload",
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && pip install -r requirements.txt",
+    "dev": "concurrently \"npm run start:backend\" \"npm run start:frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

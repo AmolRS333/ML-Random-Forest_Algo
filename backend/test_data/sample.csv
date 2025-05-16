@@ -1,0 +1,11 @@
+age,income,education_level,employment_status,credit_score,loan_approved
+25,45000,Bachelor,Employed,720,1
+35,75000,Master,Employed,780,1
+45,120000,PhD,Employed,800,1
+22,30000,High School,Employed,650,0
+30,55000,Bachelor,Employed,700,1
+28,48000,Bachelor,Employed,680,0
+40,90000,Master,Employed,750,1
+32,65000,Bachelor,Employed,720,1
+27,42000,High School,Employed,670,0
+38,85000,Master,Employed,760,1 
