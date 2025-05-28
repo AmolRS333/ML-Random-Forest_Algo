@@ -133,3 +133,4 @@ A sample dataset is provided in `backend/test_data/sample.csv` for testing purpo
 ## License
 
 MIT
+cd backend : uvicorn app.main:app --reload -; uvicorn app.main:app --reload --port 8001

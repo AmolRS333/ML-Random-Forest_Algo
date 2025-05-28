@@ -27,7 +27,7 @@ class MLProcessor:
     def _determine_problem_type(self) -> bool:
         """Determine if the problem is classification or regression."""
         unique_values = self.y.nunique()
-        return unique_values < len(self.y) * 0.1  # Classification if less than 10% unique values
+        return unique_values < len(self.y) * 0.1  # Classification if less than 10% unique values 
         
     def _train_model(self) -> None:
         """Train the appropriate Random Forest model."""
@@ -59,6 +59,7 @@ class MLProcessor:
             self.metrics = {
                 'mae': mean_absolute_error(self.y_test, y_pred),
                 'rmse': np.sqrt(mean_squared_error(self.y_test, y_pred)),
+                'mse' : mean_squared_error(self.y_test, y_pred),
                 'r2_score': r2_score(self.y_test, y_pred)
             }
             
