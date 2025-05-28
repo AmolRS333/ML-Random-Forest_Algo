@@ -22,8 +22,50 @@ DOMAIN_KEYWORDS = {
         'product', 'customer', 'sale', 'purchase', 'order', 'item', 'price',
         'quantity', 'store', 'shop', 'retail', 'inventory', 'stock', 'discount',
         'category', 'brand'
+    ],
+    'agriculture': [
+        'crop', 'yield', 'soil', 'temperature', 'rainfall', 'fertilizer',
+        'farm', 'harvest', 'plant', 'agriculture', 'pesticide', 'irrigation',
+        'humidity', 'moisture', 'climate'
+    ],
+    'transportation': [
+        'vehicle', 'speed', 'traffic', 'route', 'distance', 'fuel', 'driver',
+        'trip', 'accident', 'transport', 'road', 'logistics', 'shipment', 'travel'
+    ],
+    'environment': [
+        'pollution', 'air', 'water', 'emission', 'carbon', 'climate', 'temperature',
+        'weather', 'ozone', 'recycle', 'waste', 'green', 'energy', 'ecology'
+    ],
+    'sports': [
+        'match', 'team', 'player', 'score', 'goal', 'tournament', 'win', 'lose',
+        'stadium', 'coach', 'league', 'game', 'athlete', 'performance'
+    ],
+    'ecommerce': [
+        'user', 'cart', 'checkout', 'payment', 'wishlist', 'delivery', 'return',
+        'review', 'rating', 'browse', 'recommendation', 'seller', 'shipping'
+    ],
+    'real_estate': [
+        'property', 'house', 'apartment', 'rent', 'buy', 'sell', 'price', 'location',
+        'area', 'bedroom', 'bathroom', 'agent', 'mortgage', 'listing'
+    ],
+    'employment': [
+        'job', 'employee', 'employer', 'salary', 'position', 'department',
+        'resume', 'interview', 'hiring', 'contract', 'benefits', 'experience'
+    ],
+    'energy': [
+        'electricity', 'power', 'solar', 'wind', 'generation', 'consumption',
+        'renewable', 'grid', 'voltage', 'current', 'energy', 'unit', 'supply'
+    ],
+    'technology': [
+        'device', 'software', 'hardware', 'update', 'bug', 'version', 'release',
+        'system', 'application', 'performance', 'technology', 'tool', 'network'
+    ],
+    'tourism': [
+        'destination', 'tourist', 'package', 'hotel', 'travel', 'flight', 'booking',
+        'sightseeing', 'guide', 'trip', 'location', 'visa', 'itinerary'
     ]
 }
+
 
 def detect_domain(columns: List[str]) -> str:
     """

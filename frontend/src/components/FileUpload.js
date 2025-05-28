@@ -4,6 +4,8 @@ import axios from "axios";
 
 const FileUpload = ({ onAnalysisComplete, onError }) => {
   const [isUploading, setIsUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [fileName, setFileName] = useState("");
 
   const onDrop = useCallback(
     async (acceptedFiles) => {
@@ -15,10 +17,12 @@ const FileUpload = ({ onAnalysisComplete, onError }) => {
         return;
       }
 
+      setFileName(file.name);
       const formData = new FormData();
       formData.append("file", file);
 
       setIsUploading(true);
+      setUploadProgress(0);
 
       try {
         const response = await axios.post(
@@ -27,6 +31,12 @@ const FileUpload = ({ onAnalysisComplete, onError }) => {
           {
             headers: {
               "Content-Type": "multipart/form-data",
+            },
+            onUploadProgress: (progressEvent) => {
+              const progress = Math.round(
+                (progressEvent.loaded * 100) / progressEvent.total
+              );
+              setUploadProgress(progress);
             },
           }
         );
@@ -51,6 +61,7 @@ const FileUpload = ({ onAnalysisComplete, onError }) => {
         console.error("Upload error:", error);
       } finally {
         setIsUploading(false);
+        setUploadProgress(0);
       }
     },
     [onAnalysisComplete, onError]
@@ -68,40 +79,87 @@ const FileUpload = ({ onAnalysisComplete, onError }) => {
     <div className="w-full max-w-xl mx-auto">
       <div
         {...getRootProps()}
-        className={`p-8 border-2 border-dashed rounded-lg text-center cursor-pointer transition-colors
+        className={`relative p-8 border-2 border-dashed rounded-lg text-center cursor-pointer transition-all duration-300 ease-in-out
           ${
             isDragActive
-              ? "border-blue-500 bg-blue-50"
-              : "border-gray-300 hover:border-blue-400"
-          }`}
+              ? "border-blue-500 bg-blue-50 scale-105"
+              : "border-gray-300 hover:border-blue-400 hover:bg-gray-50"
+          }
+          ${isUploading ? "opacity-75 cursor-not-allowed" : ""}`}
       >
-        <input {...getInputProps()} />
+        <input {...getInputProps()} disabled={isUploading} />
+
         <div className="space-y-4">
-          <svg
-            className="mx-auto h-12 w-12 text-gray-400"
-            stroke="currentColor"
-            fill="none"
-            viewBox="0 0 48 48"
-            aria-hidden="true"
-          >
-            <path
-              d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <div className="text-gray-600">
-            {isUploading ? (
-              <p>Analyzing file...</p>
-            ) : isDragActive ? (
-              <p>Drop the CSV file here...</p>
-            ) : (
-              <p>Drag and drop a CSV file here, or click to select one</p>
-            )}
-          </div>
-          <p className="text-sm text-gray-500">Only CSV files are supported</p>
+          {isUploading ? (
+            <>
+              <div className="relative w-16 h-16 mx-auto">
+                <div className="absolute inset-0 border-4 border-blue-200 rounded-full"></div>
+                <div
+                  className="absolute inset-0 border-4 border-blue-500 rounded-full"
+                  style={{
+                    clipPath: `polygon(0 0, ${uploadProgress}% 0, ${uploadProgress}% 100%, 0 100%)`,
+                  }}
+                ></div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-sm font-medium text-blue-500">
+                    {uploadProgress}%
+                  </span>
+                </div>
+              </div>
+              <p className="text-gray-600 font-medium">
+                Analyzing {fileName}...
+              </p>
+            </>
+          ) : (
+            <>
+              <div className="relative">
+                <svg
+                  className={`mx-auto h-12 w-12 transition-colors duration-300 ${
+                    isDragActive ? "text-blue-500" : "text-gray-400"
+                  }`}
+                  stroke="currentColor"
+                  fill="none"
+                  viewBox="0 0 48 48"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                {isDragActive && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium animate-pulse">
+                      Drop to upload
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div className="space-y-2">
+                <p className="text-gray-600 font-medium">
+                  {isDragActive
+                    ? "Drop your CSV file here"
+                    : "Drag and drop your CSV file here"}
+                </p>
+                <p className="text-sm text-gray-500">
+                  or click to browse files
+                </p>
+              </div>
+            </>
+          )}
         </div>
+
+        {fileName && !isUploading && (
+          <div className="mt-4 text-sm text-gray-500">
+            Last uploaded: {fileName}
+          </div>
+        )}
+      </div>
+
+      <div className="mt-4 text-center">
+        <p className="text-sm text-gray-500">Supported file type: CSV</p>
       </div>
     </div>
   );
