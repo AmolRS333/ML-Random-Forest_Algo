@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from typing import Tuple, List
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import LabelEncoder # Data preprocessing utility for datasets & machine learning
 
 def preprocess_data(df: pd.DataFrame) -> Tuple[pd.DataFrame, str]:
     """
@@ -21,7 +21,7 @@ def preprocess_data(df: pd.DataFrame) -> Tuple[pd.DataFrame, str]:
             df_processed[column].fillna(df_processed[column].median(), inplace=True)
         else:
             # Fill categorical missing values with mode
-            df_processed[column].fillna(df_processed[column].mode()[0], inplace=True)
+            df_processed[column].fillna(df_processed[column].mode()[0], inplace=True) 
     
     # Encode categorical variables
     label_encoders = {}

@@ -18,9 +18,9 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <header className="bg-white shadow">
+      <header className="bg-blue-100 rounded-lg mx-8 my-2 shadow">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900">
+          <h1 className="text-3xl font-bold text-blue-600">
             Random Forest Analysis
           </h1>
         </div>
