@@ -32,7 +32,7 @@ class MLProcessor:
     def _train_model(self) -> None:
         """Train the appropriate Random Forest model."""
         X_train, X_test, y_train, y_test = train_test_split(
-            self.X, self.y, test_size=0.2, random_state=42
+            self.X, self.y, test_size=0.2, random_state=42 
         )
         
         if self.is_classification:

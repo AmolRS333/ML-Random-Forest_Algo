@@ -1,4 +1,5 @@
-from typing import List, Dict
+from typing import List, Dict  # Domain detection utility for datasets
+#         """Generate confusion matrix plot for classification problems."""
 import re
 
 # Domain-specific keywords

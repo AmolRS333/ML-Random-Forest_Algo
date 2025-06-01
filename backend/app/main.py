@@ -1,8 +1,8 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-import pandas as pd
-import numpy as np
+import pandas as pd # used for data manipulation & analysis
+import numpy as np # used for numerical operations
 from typing import Dict, Any
 import io
 import json

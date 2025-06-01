@@ -28,7 +28,7 @@ const Results = ({ data }) => {
     return (
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {Object.entries(data.metrics).map(([key, value]) => (
-          <div key={key} className="bg-white p-4 rounded-lg shadow">
+          <div key={key} className="bg-blue-100 p-4 rounded-lg shadow">
             <h3 className="text-sm font-medium text-gray-500 uppercase">
               {key}
             </h3>
